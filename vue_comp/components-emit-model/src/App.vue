@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
 import OneMember from "./components/OneMember.vue";
+import ResetButton from "./components/ResetButton.vue";
 
 //会員リスト用
 const memberListInit = new Map<number, Member>();
@@ -34,6 +35,17 @@ interface Member {
   points: number;
   note?: string;
 }
+
+//emit復習
+const count = ref(0);
+
+const countUp = () => {
+  count.value++;
+}
+
+const countReset = () => {
+  count.value = 0;
+}
 </script>
 
 <template>
@@ -41,6 +53,13 @@ interface Member {
     <h2>会員リスト</h2>
     <p>全会員の保有ポイントの合計：{{ totalPoints }}</p>
     <OneMember v-for="[id, member] of memberList" v-bind:key="id" v-bind:id="id" v-bind:name="member.name" v-bind:email="member.email" v-model:points="member.points" v-bind:note="member.note"/>
+  </section>
+
+  <section>
+    <h2>emit復習</h2>
+    <p>{{ count }}</p>
+    <button @click="countUp">カウント</button>
+    <ResetButton @reset="countReset"></ResetButton>
   </section>
 </template>
 
