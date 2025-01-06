@@ -46,6 +46,10 @@ const countUp = () => {
 const countReset = () => {
   count.value = 0;
 }
+
+const onReset = (value) => {
+  count.value = value;
+}
 </script>
 
 <template>
@@ -59,7 +63,9 @@ const countReset = () => {
     <h2>emit復習</h2>
     <p>{{ count }}</p>
     <button @click="countUp">カウント</button>
-    <ResetButton @reset="countReset"></ResetButton>
+    <!-- <ResetButton @reset="countReset"></ResetButton> -->
+    <!-- <ResetButton @hundred="count = $event"></ResetButton> -->
+     <ResetButton @onReset="onReset" />
   </section>
 </template>
 
